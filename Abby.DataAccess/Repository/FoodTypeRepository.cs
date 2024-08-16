@@ -11,8 +11,8 @@ namespace Abby.DataAccess.Repository
 {
     public class FoodTypeRepository : Repository<FoodType>, IFoodTypeRepository
     {
-        private readonly ApplicationDBContext _db;
-        public FoodTypeRepository(ApplicationDBContext db) : base(db)
+        private readonly ApplicationDbContext _db;
+        public FoodTypeRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }

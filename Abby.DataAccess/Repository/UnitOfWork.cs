@@ -10,8 +10,8 @@ namespace Abby.DataAccess.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly ApplicationDBContext _db;
-        public UnitOfWork(ApplicationDBContext db)
+        private readonly ApplicationDbContext _db;
+        public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Category = new CategoryRepository(_db);
