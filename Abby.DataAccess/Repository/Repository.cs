@@ -17,6 +17,7 @@ namespace Abby.DataAccess.Repository
         public Repository(ApplicationDBContext db)
         {
             _db = db;
+            //_db.MenuItem.Include(u => u.Category).Include(u => u.FoodType);
             this.dbSet = _db.Set<T>();
         }
         public void Add(T entity)
@@ -35,9 +36,16 @@ namespace Abby.DataAccess.Repository
             return entity;
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(string? includeProperty = null)
         {
             IQueryable<T> query = dbSet;
+            if(includeProperty != null)
+            {
+                foreach (var includeProp in includeProperty.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
             return query.ToList();
         }
 
