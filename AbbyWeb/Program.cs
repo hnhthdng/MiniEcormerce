@@ -20,6 +20,13 @@ builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Identity/Account/Login");
+    options.LogoutPath = new Microsoft.AspNetCore.Http.PathString("/Identity/Account/Logout");
+    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Identity/Account/AccessDenied");
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
