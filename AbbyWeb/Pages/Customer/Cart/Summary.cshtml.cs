@@ -78,6 +78,7 @@ namespace AbbyWeb.Pages.Customer.Cart
 				_unitOfWork.ShoppingCart.RemoveRange(ShoppingCartList);
 				_unitOfWork.Save();
 
+				#region Stripe account (phuong thuc thanh toan
 				//	var domain = "https://localhost:44322/";
 				//	var options = new SessionCreateOptions
 				//	{
@@ -123,8 +124,9 @@ namespace AbbyWeb.Pages.Customer.Cart
 				//	_unitOfWork.Save();
 				//	return new StatusCodeResult(303);
 				//}
+				#endregion
 
-				return Page();
+				return RedirectToPage("OrderConfirmation", new {id = OrderHeader.Id});
 			}
 			return Page();
 		}

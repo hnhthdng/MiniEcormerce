@@ -26,6 +26,13 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LogoutPath = new Microsoft.AspNetCore.Http.PathString("/Identity/Account/Logout");
     options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Identity/Account/AccessDenied");
 });
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+	options.IdleTimeout = TimeSpan.FromMinutes(100);
+	options.Cookie.HttpOnly = true;
+	options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -45,6 +52,8 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapRazorPages();
 
